@@ -1,5 +1,3 @@
-// src/domain/entities/Comment.ts
-
 export class Comment {
   public readonly id: string;
   public readonly content: string;
