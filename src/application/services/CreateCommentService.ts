@@ -1,15 +1,15 @@
-import { PostgresCommentRepository } from "../../infra/persistence/PostgresCommentRepository";
+import { CreateComment } from "../../domain/use-cases/CreateComment";
+import { CommentRepository } from "../../domain/repositories/CommentRepository";
 import { Comment } from "../../domain/entities/Comment";
 
 export class CreateCommentService {
-  private repo: PostgresCommentRepository;
+  private useCase: CreateComment;
 
-  constructor(repo: PostgresCommentRepository) {
-    this.repo = repo;
+  constructor(repo: CommentRepository) {
+    this.useCase = new CreateComment(repo);
   }
 
-  public async execute(content: string): Promise<Comment> {
-    const comment = new Comment({ content });
-    return await this.repo.save(comment);
+  async execute(content: string): Promise<Comment> {
+    return this.useCase.execute(content);
   }
 }
