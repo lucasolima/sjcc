@@ -1,5 +1,5 @@
 import { GoogleGenerativeAI } from "@google/generative-ai";
-import "dotenv/config"
+import { MODERATION_PROMPT } from "../../prompts/moderationPrompt";
 
 export class GeminiModerationService {
   private gemini: GoogleGenerativeAI;
@@ -12,16 +12,7 @@ export class GeminiModerationService {
     try {
       const model = this.gemini.getGenerativeModel({ model: "models/gemini-2.0-flash" });
   
-      const prompt = `
-        Você é um moderador de conteúdo e sua missão é analisar o comentário abaixo e:
-
-        - Retornar "rejected" caso o comentário contenha conteúdo ofensivo, discriminatório, perturbador, sexual e/ou violento;
-        - Retornar "approved" caso o comentário não contenha nenhum dos conteúdos citados. 
-
-        O comentário estará no idioma Português do Brasil.
-  
-        Comentário: "${content}"
-      `;
+      const prompt = MODERATION_PROMPT.replace("{{content}}", content);
   
       const result = await model.generateContent(prompt);
       const response = await result.response;
