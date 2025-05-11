@@ -9,9 +9,9 @@ export class CreateCommentService {
     this.moderation = moderationService;
   }
 
-  async execute(content: string): Promise<Comment> {
+  async execute(content: string, name: string): Promise<Comment> {
     const status = await this.moderation.analyzeComment(content);
-    const comment = new Comment({ content, status });
+    const comment = new Comment({ content, name, status });
     return await this.repo.save(comment);
   }
 }

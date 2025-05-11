@@ -23,9 +23,9 @@ class CommentController {
   }
 
   private async createComment(req: Request, res: Response) {
-    const { content } = req.body;
+    const { content, name } = req.body;
     try {
-      const comment = await this.createCommentService.execute(content);
+      const comment = await this.createCommentService.execute(content, name);
       res.status(201).json(comment);
     } catch (err: any) {
       res.status(400).json({ error: err.message });
