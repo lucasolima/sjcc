@@ -2,10 +2,13 @@ import { Router, Request, Response } from "express";
 import { PostgresCommentRepository } from "../persistence/PostgresCommentRepository";
 import { CreateCommentService } from "../../application/services/CreateCommentService";
 import { GetAllCommentsService } from "../../application/services/GetAllCommentsService";
+import { GeminiModerationService } from "../../application/services/GeminiModerationService";
+
+const moderationService = new GeminiModerationService(process.env.GEMINI_API_KEY!);
 
 class CommentController {
   private repo = new PostgresCommentRepository();
-  private createCommentService = new CreateCommentService(this.repo);
+  private createCommentService = new CreateCommentService(this.repo, moderationService);
   private getAllCommentsService = new GetAllCommentsService(this.repo);
   public router: Router;
 
