@@ -46,15 +46,18 @@ cd sjcc
      created_at DATE NOT NULL,
      status TEXT NOT NULL;
    ```
+
 3. Instale as dependências do projeto
    ```npm
    npm install
    ```
+
 4. Crie um arquivo .env e preencha os dados da API do Gemini e do Banco de Dados conforme o arquivo .env.example
    ```.env
    DATABASE_URL=postgresql://meu_usuario:minha_senha@host:porta/nome_do_banco
    GEMINI_API_KEY=minha_chave
    ```
+   
 5. Rode o projeto
    ```ǹpm
    npm run dev
