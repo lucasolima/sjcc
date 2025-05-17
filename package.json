@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "ts-node-dev src/main.ts",
     "build": "tsc",
-    "start": "node dist/main.js",
+    "start": "node dist/src/main.js",
     "generate-token": "ts-node-dev scripts/generate-token"
   },
   "keywords": [],
